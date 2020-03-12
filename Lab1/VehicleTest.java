@@ -17,17 +17,18 @@ class VehicleTest {
 
     @org.junit.jupiter.api.AfterEach
     void tearDown()  {
-        vehicleCount--;
         v.finalize();
+        vehicleCount--;
+        assertEquals(0, vehicleCount);
         assertEquals(vehicleCount, v.totalVehicle());
     }
 
     @org.junit.jupiter.api.Test
     void testFinalize() {
         Vehicle testFinal = new Vehicle();
-        int current = testFinal.totalVehicle();
+        int currentCount = testFinal.totalVehicle();
         testFinal.finalize();
-        assertEquals(current-1, v.totalVehicle());
+        assertEquals(currentCount-1, v.totalVehicle());
     }
 
     @ParameterizedTest
@@ -50,22 +51,18 @@ class VehicleTest {
     @org.junit.jupiter.api.Test
     void getSpeed() {
         System.out.println("getSpeed");
-        Vehicle x = new Vehicle(10, "west");
-        assertEquals(10, x.getSpeed());
-        x.finalize();
+        assertEquals(0, v.getSpeed());
     }
 
     @org.junit.jupiter.api.Test
     void getDir() {
         System.out.println("getDir");
-        Vehicle x = new Vehicle(10, "east");
-        assertEquals("east", x.getDir());
-        x.finalize();
+        assertEquals("north", v.getDir());
     }
 
     @org.junit.jupiter.api.Test
     void totalVehicle() {
         System.out.println("totalVehicle");
-        assert(0<vehicleCount);
+        assertEquals(vehicleCount, v.totalVehicle());
     }
 }
