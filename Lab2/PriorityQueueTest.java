@@ -5,6 +5,7 @@ import org.junit.runners.Parameterized.Parameters;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.PriorityQueue;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -29,10 +30,8 @@ public class PriorityQueueTest {
     public PriorityQueueTest(Integer[] a, Integer[] b) {
         random = new PriorityQueue<Integer>();
         correct = new PriorityQueue<Integer>();
-        for (int i = 0; i<a.length; i++) {
-            random.add(a[i]);
-            correct.add(b[i]);
-        }
+        Collections.addAll(random, a);
+        Collections.addAll(correct, b);
     }
 
     @Test
