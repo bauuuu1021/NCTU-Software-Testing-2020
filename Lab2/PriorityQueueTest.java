@@ -14,7 +14,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @RunWith(value=Parameterized.class)
 public class PriorityQueueTest {
 
-    private PriorityQueue<Integer> random, correct, testQueue;
+    private PriorityQueue<Integer> random, testQueue;
+    private Integer[] correct;
 
     @Parameters
     public static Collection testCase() {
@@ -29,15 +30,16 @@ public class PriorityQueueTest {
 
     public PriorityQueueTest(Integer[] a, Integer[] b) {
         random = new PriorityQueue<Integer>();
-        correct = new PriorityQueue<Integer>();
         Collections.addAll(random, a);
-        Collections.addAll(correct, b);
+        correct = b;
     }
 
     @Test
     public void pollTest() {
-        while (!correct.isEmpty()) {
-            assertEquals(correct.poll(), random.poll());
+        int index = 0;
+        assertEquals(correct.length, random.size());
+        while (!(random.isEmpty())) {
+            assertEquals(correct[index++], random.poll());
         }
     }
 
